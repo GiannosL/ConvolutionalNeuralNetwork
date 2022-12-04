@@ -95,6 +95,18 @@ class CNN:
         return predicted
     
     def plot_pred_loss(self):
+        """
+        Plot prediction loss as a horizontal line
+        in the sample plot with the training loss over
+        epochs.
+        """
+        if not self.trained:
+            print("Model has not been trained yet!")
+            return 1
+        elif not self.prediction_flag:
+            print("Model has not made a prediction yet!")
+            return 1
+        
         plt.figure(figsize=(10, 7))
         plt.axhline(y=self.prediction_loss, color="orange", label="test set")
         plt.plot(range(self.epochs), self.training_losses, color="black", label="train set")
