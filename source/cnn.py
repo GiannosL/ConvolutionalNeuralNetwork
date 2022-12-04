@@ -1,6 +1,7 @@
 import time
 import torch
 import torch.nn as nn
+import matplotlib.pyplot as plt
 
 from source.model import Convolutional_Model
 
@@ -17,8 +18,9 @@ class CNN:
         self.training_losses = []
         self.train_correct = []
 
-    def train(self, x, epochs:int=5):
+    def train(self, x, epochs:int=5, verbose:bool=True):
         start_time = time.time()
+        self.epochs = epochs
 
         for epoch in range(epochs):
             # show which epoch we are on
@@ -41,11 +43,22 @@ class CNN:
                 batch_loss.backward()
                 self.optimizer.step()
             
-            self.training_losses.append(batch_loss)
+            self.training_losses.append(batch_loss.item())
             self.train_correct.append(train_correct)
 
         # calculate training time, in minutes
         self.training_time = (time.time() - start_time)/60
+        #
+        if verbose:
+            print(f"Training time: {self.training_time}")
+    
+    def plot_training(self):
+        plt.figure(figsize=(10, 7))
+        plt.plot(range(self.epochs), self.training_losses, color="maroon",)
+        plt.title("Training loss over epochs", fontsize=16, weight="bold")
+        plt.xlabel("Epochs", fontsize=12)
+        plt.ylabel("Loss", fontsize=12)
+        plt.show()
 
     def predict(self, x):
         test_correct = []
@@ -58,3 +71,5 @@ class CNN:
                 test_correct += (predicted == y_test).sum()
         
         loss = self.loss_criterion(y_val, y_test)
+    
+        return predicted
