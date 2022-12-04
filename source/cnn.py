@@ -14,9 +14,12 @@ class CNN:
         self.loss_criterion = nn.CrossEntropyLoss()
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=learning_rate)
 
-        # training statistics.
+        # training statistics
         self.training_losses = []
         self.train_correct = []
+
+        # has the model been trained?
+        self.trained = False
 
     def train(self, x, epochs:int=5, verbose:bool=True):
         start_time = time.time()
@@ -45,14 +48,24 @@ class CNN:
             
             self.training_losses.append(batch_loss.item())
             self.train_correct.append(train_correct)
+        
+        # model has been trained
+        self.trained = True
 
         # calculate training time, in minutes
         self.training_time = (time.time() - start_time)/60
         #
         if verbose:
-            print(f"Training time: {self.training_time}")
+            print(f"Training time: {self.training_time: 0.2f} mins")
     
     def plot_training(self):
+        """
+        Plot loss over the range of training epochs.
+        """
+        if not self.trained:
+            print("Model has not been trained yet!")
+            return 1
+        
         plt.figure(figsize=(10, 7))
         plt.plot(range(self.epochs), self.training_losses, color="maroon",)
         plt.title("Training loss over epochs", fontsize=16, weight="bold")
