@@ -7,7 +7,7 @@ from source.model import Convolutional_Model
 
 
 class CNN:
-    def __init__(self, image_dimensions, output_classes:int, learning_rate:float=0.001) -> None:
+    def __init__(self, image_dimensions:int, output_classes:int, learning_rate:float=0.001) -> None:
         # initialized model
         self.model = Convolutional_Model(image_dims=image_dimensions, output_features=output_classes)
 
@@ -27,7 +27,11 @@ class CNN:
         self.trained = False
         self.prediction_flag = False
 
-    def train(self, x, epochs:int=5, verbose:bool=True):
+    def train(self, x:torch.Tensor, epochs:int=5, verbose:bool=True) -> None:
+        """
+        train the model on the training dataset
+        """
+        # start timing
         start_time = time.time()
         self.epochs = epochs
 
@@ -52,6 +56,7 @@ class CNN:
                 batch_loss.backward()
                 self.optimizer.step()
             
+            # save for plotting
             self.training_losses.append(batch_loss.item())
             self.train_correct.append(train_correct)
         
@@ -60,14 +65,15 @@ class CNN:
 
         # calculate training time, in minutes
         self.training_time = (time.time() - start_time)/60
-        #
+        # show training time if verbose
         if verbose:
             print(f"Training time: {self.training_time: 0.2f} mins")
     
-    def plot_training_loss(self):
+    def plot_training_loss(self) -> None:
         """
         Plot loss over the range of training epochs.
         """
+        # make sure the model has been trained
         if not self.trained:
             print("Model has not been trained yet!")
             return 1
@@ -79,7 +85,11 @@ class CNN:
         plt.ylabel("Loss", fontsize=12)
         plt.show()
 
-    def predict(self, x):
+    def predict(self, x:torch.Tensor) -> torch.Tensor:
+        """
+        make predictions through batches, this is not
+        used to train the model
+        """
         test_correct = 0
 
         with torch.no_grad():
@@ -101,6 +111,7 @@ class CNN:
         in the sample plot with the training loss over
         epochs.
         """
+        # make sure the model has been trained and made predictions
         if not self.trained:
             print("Model has not been trained yet!")
             return 1
@@ -118,4 +129,7 @@ class CNN:
         plt.show()
 
     def save(self) -> None:
+        """
+        save model
+        """
         torch.save(self.model.state_dict(), "my_model.pt")
