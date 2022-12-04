@@ -116,3 +116,6 @@ class CNN:
         plt.xlabel("Epochs", fontsize=12)
         plt.legend()
         plt.show()
+
+    def save(self) -> None:
+        torch.save(self.model.state_dict(), "my_model.pt")
