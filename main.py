@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import torch.utils
 import torchvision
 
@@ -11,6 +12,8 @@ test_data = torchvision.datasets.MNIST(root="./data", train=False, download=True
 train_loader = torch.utils.data.DataLoader(dataset=train_data, batch_size=100, shuffle=True)
 test_loader = torch.utils.data.DataLoader(dataset=test_data, batch_size=100, shuffle=True)
 
+
 # convolutional model
 cnn_model = CNN(10)
 cnn_model.train(x=train_loader)
+cnn_model.plot_training()
