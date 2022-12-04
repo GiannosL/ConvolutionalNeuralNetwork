@@ -18,8 +18,13 @@ class CNN:
         self.training_losses = []
         self.train_correct = []
 
+        # latest prediction statistics
+        self.prediction_loss = None
+        self.prediction_correct = None
+
         # has the model been trained?
         self.trained = False
+        self.prediction_flag = False
 
     def train(self, x, epochs:int=5, verbose:bool=True):
         start_time = time.time()
@@ -58,7 +63,7 @@ class CNN:
         if verbose:
             print(f"Training time: {self.training_time: 0.2f} mins")
     
-    def plot_training(self):
+    def plot_training_loss(self):
         """
         Plot loss over the range of training epochs.
         """
@@ -67,14 +72,14 @@ class CNN:
             return 1
         
         plt.figure(figsize=(10, 7))
-        plt.plot(range(self.epochs), self.training_losses, color="maroon",)
+        plt.plot(range(self.epochs), self.training_losses, color="maroon")
         plt.title("Training loss over epochs", fontsize=16, weight="bold")
         plt.xlabel("Epochs", fontsize=12)
         plt.ylabel("Loss", fontsize=12)
         plt.show()
 
     def predict(self, x):
-        test_correct = []
+        test_correct = 0
 
         with torch.no_grad():
             for x_test, y_test in x:
@@ -83,6 +88,18 @@ class CNN:
                 predicted = torch.max(y_val.data, 1)[1]
                 test_correct += (predicted == y_test).sum()
         
-        loss = self.loss_criterion(y_val, y_test)
+        self.prediction_loss = self.loss_criterion(y_val, y_test).item()
+        self.prediction_correct = test_correct
+        self.prediction_flag = True
     
         return predicted
+    
+    def plot_pred_loss(self):
+        plt.figure(figsize=(10, 7))
+        plt.axhline(y=self.prediction_loss, color="orange", label="test set")
+        plt.plot(range(self.epochs), self.training_losses, color="black", label="train set")
+        plt.title("Validation vs Training loss", fontsize=16, weight="bold")
+        plt.ylabel("Loss", fontsize=12)
+        plt.xlabel("Epochs", fontsize=12)
+        plt.legend()
+        plt.show()

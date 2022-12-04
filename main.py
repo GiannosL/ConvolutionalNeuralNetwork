@@ -16,4 +16,7 @@ test_loader = torch.utils.data.DataLoader(dataset=test_data, batch_size=100, shu
 # convolutional model
 cnn_model = CNN(10)
 cnn_model.train(x=train_loader)
-cnn_model.plot_training()
+cnn_model.predict(x=test_loader)
+
+cnn_model.plot_training_loss()
+cnn_model.plot_pred_loss()
