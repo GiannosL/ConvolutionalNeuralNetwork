@@ -16,8 +16,12 @@ test_loader = torch.utils.data.DataLoader(dataset=test_data, batch_size=100, shu
 
 # convolutional model
 cnn_model = CNN(image_dimensions=28, output_classes=10)
-cnn_model.train(x=train_loader)
+cnn_model.train(x=train_loader, epochs=15)
 cnn_model.predict(x=test_loader)
 
+# save model
+cnn_model.save()
+
+# plot stuff
 cnn_model.plot_training_loss()
 cnn_model.plot_pred_loss()
