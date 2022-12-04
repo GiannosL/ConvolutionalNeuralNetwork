@@ -37,7 +37,7 @@ class CNN:
 
         for epoch in range(epochs):
             # show which epoch we are on
-            print(f"Epoch {epoch}")
+            print(f"Epoch {epoch+1}")
 
             # number of correct predictions
             train_correct = 0
@@ -128,8 +128,11 @@ class CNN:
         plt.legend()
         plt.show()
 
-    def save(self) -> None:
+    def save(self, save_path:str="my_model.pt") -> None:
         """
         save model
         """
-        torch.save(self.model.state_dict(), "my_model.pt")
+        torch.save(self.model.state_dict(), save_path)
+    
+    def load(self, model_path:str):
+        self.model.load_state_dict(torch.load(model_path))
