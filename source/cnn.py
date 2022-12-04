@@ -7,8 +7,9 @@ from source.model import Convolutional_Model
 
 
 class CNN:
-    def __init__(self, output_classes:int, learning_rate:float=0.001) -> None:
-        self.model = Convolutional_Model(output_features=output_classes)
+    def __init__(self, image_dimensions, output_classes:int, learning_rate:float=0.001) -> None:
+        # initialized model
+        self.model = Convolutional_Model(image_dims=image_dimensions, output_features=output_classes)
 
         # loss measure
         self.loss_criterion = nn.CrossEntropyLoss()

@@ -3,6 +3,7 @@ import torch.utils
 import torchvision
 
 from source.cnn import CNN
+from source.visuals import *
 
 
 # load dataset
@@ -14,7 +15,7 @@ test_loader = torch.utils.data.DataLoader(dataset=test_data, batch_size=100, shu
 
 
 # convolutional model
-cnn_model = CNN(10)
+cnn_model = CNN(image_dimensions=28, output_classes=10)
 cnn_model.train(x=train_loader)
 cnn_model.predict(x=test_loader)
 

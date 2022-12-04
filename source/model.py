@@ -2,7 +2,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class Convolutional_Model(nn.Module):
-    def __init__(self, output_features:int) -> None:
+    def __init__(self, image_dims:int, output_features:int) -> None:
         super(Convolutional_Model, self).__init__()
         
         #
@@ -16,7 +16,7 @@ class Convolutional_Model(nn.Module):
         # final dimensions
         # convolution with no padding is -2
         # pooling is the division by 2
-        reduced_image_dims = int((((28 - 2)/2) - 2)/2)
+        reduced_image_dims = int((((image_dims - 2)/2) - 2)/2)
         convolutional_output = channels_2 * reduced_image_dims * reduced_image_dims
 
         # normal fully connected layers
