@@ -13,6 +13,8 @@
 
 <h2>Neural Network</h2>
 <p>
-    This is a Convolutional Neural Network which can take as input the image 
-    object and uses it to make predictions.
+    This is a CNN which can take as input the image object and uses it to make predictions. The hyper-parameters should be 
+    adjusted automatically in a hyper-parameter optimization step. Training should appear as a method in the object class and
+    predictions should not contribute to the training of the dataset. The model should be able to produce some plots to 
+    describe processes such as training or predicting.
 </p>
