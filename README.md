@@ -7,7 +7,7 @@
 
 <h2>Image input module</h2>
 <p>
-    Loads and prepares images for training.
+    Loads and prepares images for training. The data-object should be optimal for use in the CNN.
 </p>
 
 <h2>Neural Network</h2>
