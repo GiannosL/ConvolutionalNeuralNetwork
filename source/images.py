@@ -44,8 +44,11 @@ class Images:
     
     def show(self, index:int) -> None:
         """
-        show image object,
-        add assert to make sure that image is within index
+        show image object
         """
+        # make sure index is within bounds
+        assert(index <= self.images.shape[0])
+
+        # open and show image
         with Image.open(self.images["path"][index], "r") as img:
             img.show()
