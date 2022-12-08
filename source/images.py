@@ -23,6 +23,9 @@ class Images:
         return files
     
     def get_images(self) -> pd.DataFrame:
+        """
+        collect images from their file paths
+        """
         image_dimensions = []
         images = []
 
