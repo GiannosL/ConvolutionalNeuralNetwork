@@ -1,6 +1,6 @@
 import pandas as pd
-from PIL import Image
 from glob import glob
+from PIL import Image
 
 
 class Images:
@@ -32,12 +32,20 @@ class Images:
         # look through the images in your collection
         for f in self.file_paths:
             with Image.open(f) as img:
-                images.append(img)
+                images.append(f)
                 image_dimensions.append(img.size)
         
         # convert list to dataframe
         image_dim_df = pd.DataFrame(image_dimensions)
-        image_dim_df["IMG"] = images
+        image_dim_df["path"] = images
         image_dim_df.rename(columns={0: "X", 1: "Y"}, inplace=True)
         
         return image_dim_df
+    
+    def show(self, index:int) -> None:
+        """
+        show image object,
+        add assert to make sure that image is within index
+        """
+        with Image.open(self.images["path"][index], "r") as img:
+            img.show()
