@@ -58,9 +58,6 @@ class Images:
                 img = np.transpose(img.numpy(), (1,2,0))
                 images.append(img)
         
-        # convert list to dataframe
-        images = torch.Tensor(images)
-        
         return image_metadata, images
     
     def add_class(self, path:str, file_type:str, class_name:str) -> None:
@@ -68,15 +65,18 @@ class Images:
         adds images of new class to dataset
         """
         curr_metadata, curr_images = self.get_images(path, file_type)
+        self.metadata = pd.concat([self.metadata, curr_metadata], ignore_index = True)
+        
         for i in range(curr_metadata.shape[0]):
             self.labels.append(class_name)
+            self.images.append(curr_images[i])
     
     def show(self, index:int) -> None:
         """
         show image object
         """
         # make sure index is within bounds
-        assert(index <= self.images.shape[0])
+        assert(index <= self.metadata.shape[0])
 
         # open and show image
         plt.imshow(self.images[index])
