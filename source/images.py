@@ -1,12 +1,20 @@
+import numpy as np
 import pandas as pd
 from glob import glob
 from PIL import Image
+import matplotlib.pyplot as plt
+from torchvision import transforms
 
 
 class Images:
     def __init__(self, directory_path:str, file_type:str="jpg") -> None:
         # path to image files
         self.file_paths = self.collect_files(directory_path, file_type)
+        # image transformer
+        self.transforms = transforms.Compose([
+            transforms.ToTensor()
+        ])
+        
         # images dimensions
         self.images = self.get_images()
     
@@ -30,14 +38,16 @@ class Images:
         images = []
 
         # look through the images in your collection
-        for f in self.file_paths:
+        for f in self.file_paths[:10]:
             with Image.open(f) as img:
-                images.append(f)
+                img = self.transforms(img)
+                img = np.transpose(img.numpy(), (1,2,0))
+                images.append(img)
                 image_dimensions.append(img.size)
         
         # convert list to dataframe
         image_dim_df = pd.DataFrame(image_dimensions)
-        image_dim_df["path"] = images
+        image_dim_df["image"] = images
         image_dim_df.rename(columns={0: "X", 1: "Y"}, inplace=True)
         
         return image_dim_df
@@ -50,5 +60,5 @@ class Images:
         assert(index <= self.images.shape[0])
 
         # open and show image
-        with Image.open(self.images["path"][index], "r") as img:
-            img.show()
+        plt.imshow(self.images["image"][index])
+        plt.show()
