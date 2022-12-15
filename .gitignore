@@ -3,4 +3,4 @@ __pycache__/
 source/__pycache__/
 
 source/visuals.py
-image_tests.py
+image_test.py
