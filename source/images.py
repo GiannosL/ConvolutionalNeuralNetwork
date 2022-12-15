@@ -1,3 +1,4 @@
+import torch
 import numpy as np
 import pandas as pd
 from glob import glob
@@ -22,7 +23,7 @@ class Images:
         ])
         
         # images dimensions
-        self.images = self.get_images()
+        self.metadata, self.images = self.get_images()
     
     def collect_files(self, directory_path:str, file_type:str) -> list:
         """
@@ -46,17 +47,17 @@ class Images:
         # look through the images in your collection
         for f in self.file_paths[:10]:
             with Image.open(f) as img:
+                image_dimensions.append(img.size)
                 img = self.transforms(img)
                 img = np.transpose(img.numpy(), (1,2,0))
                 images.append(img)
-                image_dimensions.append(img.size)
         
         # convert list to dataframe
-        image_dim_df = pd.DataFrame(image_dimensions)
-        image_dim_df["image"] = images
-        image_dim_df.rename(columns={0: "X", 1: "Y"}, inplace=True)
+        image_metadata = pd.DataFrame(image_dimensions)
+        image_metadata.rename(columns={0: "X", 1: "Y"}, inplace=True)
+        images = torch.Tensor(images)
         
-        return image_dim_df
+        return image_metadata, images
     
     def show(self, index:int) -> None:
         """
@@ -66,5 +67,5 @@ class Images:
         assert(index <= self.images.shape[0])
 
         # open and show image
-        plt.imshow(self.images["image"][index])
+        plt.imshow(self.images[index])
         plt.show()
