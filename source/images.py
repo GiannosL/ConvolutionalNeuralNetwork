@@ -8,12 +8,10 @@ from torchvision import transforms as torch_transforms
 
 
 class Images:
-    def __init__(self, directory_path:str, file_type:str="jpg") -> None:
-        # path to image files
-        self.file_paths = self.collect_files(directory_path, file_type)
-        
+    def __init__(self, directory_path:str, class_name:str, file_type:str="jpg") -> None:
         # images dimensions
-        self.metadata, self.images = self.get_images()
+        self.metadata, self.images = self.get_images(directory_path, file_type)
+        self.labels = [class_name for i in range(self.metadata.shape[0])]
     
     def collect_files(self, directory_path:str, file_type:str) -> list:
         """
@@ -27,15 +25,16 @@ class Images:
 
         return files
     
-    def get_images(self) -> pd.DataFrame:
+    def get_images(self, directory_path:str, file_type:str) -> tuple:
         """
         collect images from their file paths
         """
+        file_paths = self.collect_files(directory_path, file_type)
         image_dimensions = []
         images = []
 
         # parse through the images to get dimensions
-        for f in self.file_paths[:10]:
+        for f in file_paths[:10]:
             with Image.open(f) as img:
                 image_dimensions.append(img.size)
         
@@ -53,7 +52,7 @@ class Images:
         ])
 
         # save images as tensors, give them maximum dimensions
-        for f in self.file_paths[:10]:
+        for f in file_paths[:10]:
             with Image.open(f) as img:
                 img = transforms(img)
                 img = np.transpose(img.numpy(), (1,2,0))
@@ -63,6 +62,14 @@ class Images:
         images = torch.Tensor(images)
         
         return image_metadata, images
+    
+    def add_class(self, path:str, file_type:str, class_name:str) -> None:
+        """
+        adds images of new class to dataset
+        """
+        curr_metadata, curr_images = self.get_images(path, file_type)
+        for i in range(curr_metadata.shape[0]):
+            self.labels.append(class_name)
     
     def show(self, index:int) -> None:
         """
