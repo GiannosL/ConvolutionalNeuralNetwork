@@ -2,5 +2,7 @@ data/
 __pycache__/
 source/__pycache__/
 
+my_model.pt
+
 source/visuals.py
 image_test.py
