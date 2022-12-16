@@ -1,4 +1,3 @@
-import os
 from torchvision import datasets, transforms
 
 class Image_Loader:
@@ -19,8 +18,9 @@ class Image_Loader:
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
+        path = path if path.endswith("/") else f"{path}/"
 
-        self.train_data = datasets.ImageFolder(os.path.join(path, "train"),
+        self.train_data = datasets.ImageFolder(f"{path}train",
                                           transform=self.train_transforms)
-        self.test_data = datasets.ImageFolder(os.path.join(path, "test"),
+        self.test_data = datasets.ImageFolder(f"{path}test",
                                           transform=self.test_transforms)
