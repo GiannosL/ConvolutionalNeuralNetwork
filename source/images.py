@@ -34,7 +34,7 @@ class Images:
         images = []
 
         # parse through the images to get dimensions
-        for f in file_paths[:10]:
+        for f in file_paths[:100]:
             with Image.open(f) as img:
                 image_dimensions.append(img.size)
         
@@ -52,7 +52,7 @@ class Images:
         ])
 
         # save images as tensors, give them maximum dimensions
-        for f in file_paths[:10]:
+        for f in file_paths[:100]:
             with Image.open(f) as img:
                 img = transforms(img)
                 img = np.transpose(img.numpy(), (1,2,0))
