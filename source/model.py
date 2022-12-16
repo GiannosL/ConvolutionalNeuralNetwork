@@ -3,15 +3,16 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class Convolutional_Model(nn.Module):
-    def __init__(self, image_dims:int, output_features:int) -> None:
+    def __init__(self, image_dims:int, output_features:int, colored_image:bool=True) -> None:
         super(Convolutional_Model, self).__init__()
-        
+        #
+        color_channels = 3 if colored_image else 1
         #
         channels_1 = 6
         channels_2 = 16
 
         # convolutional layer, input_channels refers to the image colours (1 - gray, 3 - colour)
-        self.conv1 = nn.Conv2d(in_channels=1, out_channels=channels_1, kernel_size=3, stride=1)
+        self.conv1 = nn.Conv2d(in_channels=color_channels, out_channels=channels_1, kernel_size=3, stride=1)
         self.conv2 = nn.Conv2d(in_channels=6, out_channels=channels_2, kernel_size=3, stride=1)
 
         # final dimensions
