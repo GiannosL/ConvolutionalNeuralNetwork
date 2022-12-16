@@ -1,3 +1,4 @@
+from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
 class Image_Loader:
@@ -20,7 +21,10 @@ class Image_Loader:
         ])
         path = path if path.endswith("/") else f"{path}/"
 
-        self.train_data = datasets.ImageFolder(f"{path}train",
+        train_dt = datasets.ImageFolder(f"{path}train",
                                           transform=self.train_transforms)
-        self.test_data = datasets.ImageFolder(f"{path}test",
+        test_dt = datasets.ImageFolder(f"{path}test",
                                           transform=self.test_transforms)
+        
+        self.train_data = DataLoader(train_dt, batch_size=10, shuffle=False)
+        self.test_data = DataLoader(test_dt, batch_size=10, shuffle=False)
