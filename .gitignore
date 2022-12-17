@@ -2,6 +2,9 @@ data/
 __pycache__/
 source/__pycache__/
 
+.DS_store
+source/.DS_store
+
 my_model.pt
 
 source/visuals.py
