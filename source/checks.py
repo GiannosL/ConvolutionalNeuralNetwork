@@ -1,4 +1,4 @@
-import yaml
+import os, yaml
 
 
 class Input_Handling:
@@ -29,6 +29,23 @@ class Input_Handling:
         if self.yaml_file["train"] == "yes":
             return True
         elif (not self.yaml_file["train"]) or (self.yaml_file["train"] == "no"):
+            # check if model to load exists.
+            self.check_for_model()
             return False
         else:
             raise Exception("[train] option should be yes/no.")
+    
+    def check_for_model(self) -> None:
+        """
+        doc
+        """
+        # check train option in YAML file
+        if not "save_model" in self.yaml_file.keys():
+            raise Exception("[save_model] option not included...")
+        
+        # when model should already exist
+        path = self.yaml_file["save_model"]
+        is_model = os.path.exists(path)
+        # if model does not exist throw error
+        if not is_model:
+            raise Exception(f"pytorch model specified through 'save_model'. Path: {path}")
