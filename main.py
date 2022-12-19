@@ -12,7 +12,7 @@ cnn_model = CNN(image_dimensions=224, output_classes=2)
 
 if check.train_flag:
     # load dataset
-    data = Image_Loader("../datasets/pet_images/")
+    data = Image_Loader(path=check.training_data)
 
     # convolutional model
     cnn_model.train(x=data.train_data, epochs=10)

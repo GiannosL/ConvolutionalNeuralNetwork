@@ -1,2 +1,3 @@
 train: "yes"
 save_model: "apollo.pt"
+training_data: "~/Desktop/projects/datasets/pet_images/"

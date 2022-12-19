@@ -28,6 +28,7 @@ class Input_Handling:
         
         # check training flag
         if self.yaml_file["train"] == "yes":
+            self.check_for_data()
             return True
         elif (not self.yaml_file["train"]) or (self.yaml_file["train"] == "no"):
             # check if model to load exists.
@@ -35,6 +36,23 @@ class Input_Handling:
             return False
         else:
             raise Exception("[train] option should be yes/no.")
+    
+    def check_for_data(self) -> None:
+        """
+        doc
+        """
+        # check train option in YAML file
+        if not "training_data" in self.yaml_file.keys():
+            raise Exception("[training_data] option not included...")
+        
+        # when model should already exist
+        path = self.yaml_file["training_data"]
+        is_model = os.path.isdir(os.path.expanduser(path))
+        # if model does not exist throw error
+        if is_model:
+            self.training_data = path
+        else:
+            raise Exception(f"Training file-structure specified through 'training_data'. Path: {path}")
     
     def check_for_model(self) -> None:
         """
