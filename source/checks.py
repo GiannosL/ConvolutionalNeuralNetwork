@@ -7,6 +7,9 @@ class Input_Handling:
         self.train_flag = self.training_check()
 
     def read_yaml(self, path:str) -> dict:
+        """
+        doc
+        """
         with open(path, "r") as stream:
             try:
                 local_dict = yaml.safe_load(stream)
@@ -15,9 +18,17 @@ class Input_Handling:
         return local_dict
 
     def training_check(self) -> bool:
+        """
+        doc
+        """
+        # check train option in YAML file
+        if not "train" in self.yaml_file.keys():
+            raise Exception("[train] option should be included in YAML file [\"yes\"/\"no\"].")
+        
+        # check training flag
         if self.yaml_file["train"] == "yes":
             return True
         elif (not self.yaml_file["train"]) or (self.yaml_file["train"] == "no"):
             return False
         else:
-            raise("[train] option should be yes/no.")
+            raise Exception("[train] option should be yes/no.")
