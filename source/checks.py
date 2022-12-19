@@ -3,6 +3,7 @@ import os, yaml
 
 class Input_Handling:
     def __init__(self, yaml_path:str) -> None:
+        self.model = None
         self.yaml_file = self.read_yaml(path=yaml_path)
         self.train_flag = self.training_check()
 
@@ -47,5 +48,7 @@ class Input_Handling:
         path = self.yaml_file["save_model"]
         is_model = os.path.exists(path)
         # if model does not exist throw error
-        if not is_model:
+        if is_model:
+            self.model = path
+        else:
             raise Exception(f"pytorch model specified through 'save_model'. Path: {path}")
