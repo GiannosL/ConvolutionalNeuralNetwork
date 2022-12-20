@@ -9,6 +9,8 @@
     <img src="https://img.shields.io/badge/MatPlotLib-3.5.2-blue" alt="MatPlotLib">
 </div>
 
+<h2>Description</h2>
+
 <p>
     The goal is to create a package that contains an automated implementation of a Convolutional Neural Network (CNN). 
     The model is going to take as input jpeg images, manipulate them and train on them in order to make predictions.
