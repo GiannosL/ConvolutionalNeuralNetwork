@@ -76,7 +76,9 @@ class Input_Handling:
         """
         doc
         """
+        # default value
         n_epochs = 10
+
         # check train option in YAML file
         if "epochs" in self.yaml_file.keys():
             n_epochs = int(self.yaml_file["epochs"])

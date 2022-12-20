@@ -12,14 +12,14 @@ cnn_model = CNN(image_dimensions=224, output_classes=2)
 
 if check.train_flag:
     # load dataset
-    data = Image_Loader(path=check.training_data)
+    cnn_model.set_training_data(Image_Loader(path=check.training_data))
 
     # set model epochs
     cnn_model.set_epochs(n=check.n_epochs)
 
     # convolutional model
-    cnn_model.train(x=data.train_data)
-    cnn_model.predict(x=data.test_data)
+    cnn_model.train()
+    #cnn_model.predict(x=data.test_data)
 
     # save model
     cnn_model.save()

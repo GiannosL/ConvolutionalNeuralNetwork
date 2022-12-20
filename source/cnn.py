@@ -4,6 +4,7 @@ import torch.nn as nn
 import matplotlib.pyplot as plt
 
 from source.model import Convolutional_Model
+from source.image_loader import Image_Loader
 
 
 class CNN:
@@ -35,14 +36,21 @@ class CNN:
         sets number of epochs
         """
         self.n_epochs = n
+    
+    def set_training_data(self, data:Image_Loader) -> None:
+        """
+        set dataset for training
+        """
+        self.data = data
 
-    def train(self, x:torch.Tensor, verbose:bool=True) -> None:
+    def train(self, verbose:bool=True) -> None:
         """
         train the model on the training dataset
         """
         # start timing
         start_time = time.time()
 
+        x = self.data.train_data
         for epoch in range(self.n_epochs):
             # show which epoch we are on
             print(f"Epoch {epoch+1}")
