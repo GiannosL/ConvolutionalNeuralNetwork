@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 from source.model import Convolutional_Model
 from source.image_loader import Image_Loader
+from source.termcolors import Terminal_Colors as tm
 
 
 class CNN:
@@ -53,7 +54,7 @@ class CNN:
         x = self.data.train_data
         for epoch in range(self.n_epochs):
             # show which epoch we are on
-            print(f"Epoch {epoch+1}")
+            print(f"{tm.bold}Epoch{tm.endc} {epoch+1}")
 
             # number of correct predictions
             train_correct = 0
@@ -83,7 +84,7 @@ class CNN:
         self.training_time = (time.time() - start_time)/60
         # show training time if verbose
         if verbose:
-            print(f"Training time: {self.training_time: 0.2f} mins")
+            print(f"{tm.okgreen}Training time: {self.training_time: 0.2f} mins{tm.endc}")
     
     def plot_training_loss(self) -> None:
         """
@@ -91,7 +92,7 @@ class CNN:
         """
         # make sure the model has been trained
         if not self.trained:
-            print("Model has not been trained yet!")
+            print(f"{tm.fail}Model has not been trained yet!{tm.endc}")
             return 1
         
         plt.figure(figsize=(10, 7))
@@ -129,10 +130,10 @@ class CNN:
         """
         # make sure the model has been trained and made predictions
         if not self.trained:
-            print("Model has not been trained yet!")
+            print(f"{tm.fail}Model has not been trained yet!{tm.endc}")
             return 1
         elif not self.prediction_flag:
-            print("Model has not made a prediction yet!")
+            print(f"{tm.fail}Model has not made a prediction yet!{tm.endc}")
             return 1
         
         plt.figure(figsize=(10, 7))
