@@ -66,7 +66,7 @@ class Input_Handling:
         
         # when model should already exist
         path = self.yaml_file["save_model"]
-        is_model = os.path.exists(path)
+        is_model = os.path.isdir(os.path.expanduser(path))
         # if model does not exist throw error
         if is_model:
             self.model = path
