@@ -2,6 +2,7 @@
 from source.cnn import CNN
 from source.checks import Input_Handling
 from source.image_loader import Image_Loader
+from source.generate_report import generate_report
 
 
 # check input
@@ -28,6 +29,9 @@ if check.train_flag:
     cnn_model.plot_training_loss()
     cnn_model.plot_pred_loss()
 
+    # generate training report
+    generate_report(input_obj=check, output_dir="")
+    
 else:
     # load pre-trained model
     cnn_model.load(model_path=check.model)

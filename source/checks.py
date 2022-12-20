@@ -7,6 +7,7 @@ class Input_Handling:
         self.yaml_file = self.read_yaml(path=yaml_path)
         self.train_flag = self.training_check()
         self.n_epochs = self.get_epochs()
+        self.output_directory = self.get_output_path()
 
     def read_yaml(self, path:str) -> dict:
         """
@@ -72,6 +73,25 @@ class Input_Handling:
         else:
             raise Exception(f"pytorch model specified through 'save_model'. Path: {path}")
     
+    def get_output_path(self) -> str:
+        """
+        doc
+        """
+        # check model option in YAML file
+        if not "output_directory" in self.yaml_file.keys():
+            raise Exception("[output_directory] option not included...")
+        
+        # when model should already exist
+        path = self.yaml_file["output_directory"]
+        is_model = os.path.exists(path)
+
+        # if model does not exist throw error
+        if not is_model:
+            raise Exception(f"Output directory 'output_directory' missing. Path: {path}")
+        
+        return path
+
+
     def get_epochs(self) -> None:
         """
         doc
