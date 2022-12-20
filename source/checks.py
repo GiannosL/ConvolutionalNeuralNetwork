@@ -91,7 +91,6 @@ class Input_Handling:
         
         return path
 
-
     def get_epochs(self) -> None:
         """
         doc

@@ -8,3 +8,4 @@ class Terminal_Colors:
     endc = "\033[0m"
     bold = "\033[1m"
     underline = "\033[4m"
+    
