@@ -30,6 +30,12 @@ class CNN:
         # has the model been trained?
         self.trained = False
         self.prediction_flag = False
+    
+    def set_epochs(self, n:int) -> None:
+        """
+        sets number of epochs
+        """
+        self.n_epochs = n
 
     def train(self, x:torch.Tensor, verbose:bool=True) -> None:
         """
