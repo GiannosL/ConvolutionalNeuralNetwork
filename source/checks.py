@@ -66,7 +66,7 @@ class Input_Handling:
         
         # when model should already exist
         path = self.yaml_file["save_model"]
-        is_model = os.path.isdir(os.path.expanduser(path))
+        is_model = os.path.exists(path)
         # if model does not exist throw error
         if is_model:
             self.model = path
@@ -82,9 +82,8 @@ class Input_Handling:
             raise Exception("[output_directory] option not included...")
         
         # when model should already exist
-        path = self.yaml_file["output_directory"]
-        is_model = os.path.exists(path)
-
+        path = os.path.expanduser(self.yaml_file["output_directory"]) 
+        is_model = os.path.isdir(path)
         # if model does not exist throw error
         if not is_model:
             raise Exception(f"Output directory 'output_directory' missing. Path: {path}")
