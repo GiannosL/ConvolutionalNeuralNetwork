@@ -13,7 +13,6 @@ class CNN:
 
         # training_parameters
         self.learning_rate = learning_rate
-        self.n_epochs = 10
 
         # loss measure
         self.loss_criterion = nn.CrossEntropyLoss()

@@ -3,9 +3,10 @@ import os, yaml
 
 class Input_Handling:
     def __init__(self, yaml_path:str) -> None:
-        self.model, self.n_epochs = None, None
+        self.model = None
         self.yaml_file = self.read_yaml(path=yaml_path)
         self.train_flag = self.training_check()
+        self.n_epochs = self.get_epochs()
 
     def read_yaml(self, path:str) -> dict:
         """
@@ -75,10 +76,12 @@ class Input_Handling:
         """
         doc
         """
+        n_epochs = 10
         # check train option in YAML file
-        if "save_model" in self.yaml_file.keys():
-            self.epochs = self.yaml_file["epochs"]
+        if "epochs" in self.yaml_file.keys():
+            n_epochs = int(self.yaml_file["epochs"])
         else:
             print("Option \"epochs\" is not set from YAML file. Default: 10")
-            self.n_epochs = 10
+            
+        return n_epochs
         
