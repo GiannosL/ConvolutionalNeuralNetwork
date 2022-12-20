@@ -1,4 +1,5 @@
 import os, yaml
+from source.termcolors import Terminal_Colors as tm
 
 
 class Input_Handling:
@@ -45,7 +46,7 @@ class Input_Handling:
         """
         # check train option in YAML file
         if not "training_data" in self.yaml_file.keys():
-            raise Exception("[training_data] option not included...")
+            raise Exception(f"{tm.fail}[training_data] option not included...{tm.endc}")
         
         # when model should already exist
         path = self.yaml_file["training_data"]
@@ -54,7 +55,7 @@ class Input_Handling:
         if is_model:
             self.training_data = path
         else:
-            raise Exception(f"Training file-structure specified through 'training_data'. Path: {path}")
+            raise Exception(f"{tm.fail}Training file-structure specified through 'training_data'. Path: {path}{tm.endc}")
     
     def check_for_model(self) -> None:
         """
@@ -62,7 +63,7 @@ class Input_Handling:
         """
         # check model option in YAML file
         if not "save_model" in self.yaml_file.keys():
-            raise Exception("[save_model] option not included...")
+            raise Exception(f"{tm.fail}[save_model] option not included...{tm.endc}")
         
         # when model should already exist
         path = self.yaml_file["save_model"]
@@ -71,7 +72,7 @@ class Input_Handling:
         if is_model:
             self.model = path
         else:
-            raise Exception(f"pytorch model specified through 'save_model'. Path: {path}")
+            raise Exception(f"{tm.fail}PyTorch model specified through 'save_model'. Path: {path}{tm.endc}")
     
     def get_output_path(self) -> str:
         """
@@ -79,14 +80,14 @@ class Input_Handling:
         """
         # check model option in YAML file
         if not "output_directory" in self.yaml_file.keys():
-            raise Exception("[output_directory] option not included...")
+            raise Exception(f"{tm.fail}[output_directory] option not included...{tm.endc}")
         
         # when model should already exist
         path = os.path.expanduser(self.yaml_file["output_directory"]) 
         is_model = os.path.isdir(path)
         # if model does not exist throw error
         if not is_model:
-            raise Exception(f"Output directory 'output_directory' missing. Path: {path}")
+            raise Exception(f"{tm.fail}Output directory 'output_directory' missing. Path: {path}{tm.endc}")
         
         return path
 
@@ -102,7 +103,7 @@ class Input_Handling:
         if "epochs" in self.yaml_file.keys():
             n_epochs = int(self.yaml_file["epochs"])
         else:
-            print("Option \"epochs\" is not set from YAML file. Default: 10")
+            print(f"{tm.warning}Option \"epochs\" is not set from YAML file. Default: 10{tm.endc}")
             
         return n_epochs
         
