@@ -1,3 +1,6 @@
+from checks import Input_Handling
+
+
 def read_html(filename:str) -> str:
     """
     doc
@@ -8,7 +11,7 @@ def read_html(filename:str) -> str:
     return my_file
 
 
-def generate_main(filename:str, output_directory:str) -> None:
+def generate_main(filename:str, output_directory:str, model_obj:Input_Handling) -> None:
     """
     doc
     """
@@ -16,7 +19,7 @@ def generate_main(filename:str, output_directory:str) -> None:
     main_html =  read_html(filename)
     
     # replace placeholders in string
-    main_html = main_html.replace(old="_MODEL_NAME_", new="")
+    main_html = main_html.replace(old="_MODEL_NAME_", new=model_obj.model.split(".")[0])
     main_html = main_html.replace(old="_N_TRAINING_IMAGES_", new="")
     main_html = main_html.replace(old="_N_EPOCHS_", new="")
 
@@ -25,8 +28,9 @@ def generate_main(filename:str, output_directory:str) -> None:
         f.write(main_html)
 
 
-def generate_report() -> None:
+def generate_report(input_obj:Input_Handling, output_dir:str) -> None:
     """
     generate HTML-report files based on templates
     """
-    generate_main("templates/home.html")
+    generate_main(filename="templates/home.html", output_directory=output_dir, 
+                  model_obj=input_obj)
