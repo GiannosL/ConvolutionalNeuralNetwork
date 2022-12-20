@@ -14,8 +14,11 @@ if check.train_flag:
     # load dataset
     data = Image_Loader(path=check.training_data)
 
+    # set model epochs
+    cnn_model.set_epochs(n=check.n_epochs)
+
     # convolutional model
-    cnn_model.train(x=data.train_data, epochs=10)
+    cnn_model.train(x=data.train_data)
     cnn_model.predict(x=data.test_data)
 
     # save model

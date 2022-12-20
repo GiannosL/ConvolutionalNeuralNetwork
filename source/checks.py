@@ -3,7 +3,7 @@ import os, yaml
 
 class Input_Handling:
     def __init__(self, yaml_path:str) -> None:
-        self.model = None
+        self.model, self.n_epochs = None, None
         self.yaml_file = self.read_yaml(path=yaml_path)
         self.train_flag = self.training_check()
 
@@ -58,7 +58,7 @@ class Input_Handling:
         """
         doc
         """
-        # check train option in YAML file
+        # check model option in YAML file
         if not "save_model" in self.yaml_file.keys():
             raise Exception("[save_model] option not included...")
         
@@ -70,3 +70,15 @@ class Input_Handling:
             self.model = path
         else:
             raise Exception(f"pytorch model specified through 'save_model'. Path: {path}")
+    
+    def get_epochs(self) -> None:
+        """
+        doc
+        """
+        # check train option in YAML file
+        if "save_model" in self.yaml_file.keys():
+            self.epochs = self.yaml_file["epochs"]
+        else:
+            print("Option \"epochs\" is not set from YAML file. Default: 10")
+            self.n_epochs = 10
+        
