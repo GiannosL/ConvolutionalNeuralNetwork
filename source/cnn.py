@@ -11,9 +11,13 @@ class CNN:
         # initialized model
         self.model = Convolutional_Model(image_dims=image_dimensions, output_features=output_classes)
 
+        # training_parameters
+        self.learning_rate = learning_rate
+        self.n_epochs = 10
+
         # loss measure
         self.loss_criterion = nn.CrossEntropyLoss()
-        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=learning_rate)
+        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.learning_rate)
 
         # training statistics
         self.training_losses = []
@@ -27,15 +31,14 @@ class CNN:
         self.trained = False
         self.prediction_flag = False
 
-    def train(self, x:torch.Tensor, epochs:int=5, verbose:bool=True) -> None:
+    def train(self, x:torch.Tensor, verbose:bool=True) -> None:
         """
         train the model on the training dataset
         """
         # start timing
         start_time = time.time()
-        self.epochs = epochs
 
-        for epoch in range(epochs):
+        for epoch in range(self.n_epochs):
             # show which epoch we are on
             print(f"Epoch {epoch+1}")
 
@@ -79,7 +82,7 @@ class CNN:
             return 1
         
         plt.figure(figsize=(10, 7))
-        plt.plot(range(self.epochs), self.training_losses, color="maroon")
+        plt.plot(range(self.n_epochs), self.training_losses, color="maroon")
         plt.title("Training loss over epochs", fontsize=16, weight="bold")
         plt.xlabel("Epochs", fontsize=12)
         plt.ylabel("Loss", fontsize=12)
@@ -121,7 +124,7 @@ class CNN:
         
         plt.figure(figsize=(10, 7))
         plt.axhline(y=self.prediction_loss, color="orange", label="test set")
-        plt.plot(range(self.epochs), self.training_losses, color="black", label="train set")
+        plt.plot(range(self.n_epochs), self.training_losses, color="black", label="train set")
         plt.title("Validation vs Training loss", fontsize=16, weight="bold")
         plt.ylabel("Loss", fontsize=12)
         plt.xlabel("Epochs", fontsize=12)
