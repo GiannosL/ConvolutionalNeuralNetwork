@@ -18,7 +18,7 @@ class Input_Handling:
             try:
                 local_dict = yaml.safe_load(stream)
             except yaml.YAMLError as exc:
-                print(exc)
+                print(f"{tm.fail}{exc}{tm.endc}")
         return local_dict
 
     def training_check(self) -> bool:
