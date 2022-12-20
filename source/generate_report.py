@@ -1,4 +1,4 @@
-from checks import Input_Handling
+from source.checks import Input_Handling
 
 
 def read_html(filename:str) -> str:
