@@ -1,5 +1,7 @@
 <h1>A simple implementation of Convolutional Neural Networks</h1>
 
+<h2>Software</h2>
+
 <div align="center">
     <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="python">
     <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white" alt="">
