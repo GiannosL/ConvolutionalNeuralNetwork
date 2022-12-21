@@ -24,13 +24,13 @@ if check.train_flag:
 
     # save model
     cnn_model.save(save_path=f"{check.model_dir}/{check.model_name}.pt")
+    
+    # generate training report
+    generate_report(input_obj=check, model=cnn_model, output_dir=check.report_dir)
 
     # plot stuff
     cnn_model.plot_training_loss()
     cnn_model.plot_pred_loss()
-
-    # generate training report
-    generate_report(input_obj=check, output_dir=check.report_dir)
     
 else:
     # load pre-trained model

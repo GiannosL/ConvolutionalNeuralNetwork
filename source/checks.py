@@ -126,5 +126,5 @@ class Input_Handling:
             try:
                 os.mkdir(direc)
             except:
-                print(f"{tm.warning}Could not generate directory: {direc}! {tm.endc}")
+                print(f"{tm.warning}Could not generate directory: {direc} !{tm.endc}")
         

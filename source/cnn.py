@@ -9,9 +9,11 @@ from source.termcolors import Terminal_Colors as tm
 
 
 class CNN:
-    def __init__(self, image_dimensions:int, output_classes:int, learning_rate:float=0.001) -> None:
+    def __init__(self, image_dimensions:int, output_classes:int, learning_rate:float=0.001,
+                 model_name:str="Pythagoras") -> None:
         # initialized model
         self.model = Convolutional_Model(image_dims=image_dimensions, output_features=output_classes)
+        self.model_name = model_name
 
         # training_parameters
         self.learning_rate = learning_rate
