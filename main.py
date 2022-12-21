@@ -9,7 +9,7 @@ from source.generate_report import generate_report
 check = Input_Handling(yaml_path="configuration.yaml")
 
 # create CNN model
-cnn_model = CNN(image_dimensions=224, output_classes=2)
+cnn_model = CNN(image_dimensions=224, output_classes=2, model_name=check.model_name)
 
 if check.train_flag:
     # load dataset
@@ -26,7 +26,7 @@ if check.train_flag:
     cnn_model.save(save_path=f"{check.model_dir}/{check.model_name}.pt")
     
     # generate training report
-    generate_report(input_obj=check, model=cnn_model, output_dir=check.report_dir)
+    generate_report(check=check, model=cnn_model, output_dir=check.report_dir)
 
     # plot stuff
     cnn_model.plot_training_loss()

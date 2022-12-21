@@ -4,7 +4,6 @@ from source.termcolors import Terminal_Colors as tm
 
 class Input_Handling:
     def __init__(self, yaml_path:str) -> None:
-        self.model_name = None
         self.yaml_file = self.read_yaml(path=yaml_path)
         self.train_flag = self.training_check()
         self.n_epochs = self.get_epochs()
@@ -35,6 +34,7 @@ class Input_Handling:
         # check training flag
         if self.yaml_file["train"] == "yes":
             self.check_for_data()
+            self.set_model_name()
             return True
         elif (not self.yaml_file["train"]) or (self.yaml_file["train"] == "no"):
             # check if model to load exists.
@@ -60,6 +60,16 @@ class Input_Handling:
         else:
             raise Exception(f"{tm.fail}Training file-structure specified through 'training_data'. Path: {path}{tm.endc}")
     
+    def set_model_name(self) -> None:
+        """
+        set model name when training
+        """
+        # check model option in YAML file
+        if "model_name" in self.yaml_file.keys():
+            self.model_name = self.yaml_file["model_name"]
+        else:
+            self.model_name = "Pythagoras"
+            
     def check_for_model(self) -> None:
         """
         doc
@@ -73,7 +83,7 @@ class Input_Handling:
         is_model = os.path.exists(f"{path}.pt")
         # if model does not exist throw error
         if is_model:
-            self.model = path
+            self.model_name = path
         else:
             raise Exception(f"{tm.fail}PyTorch model specified through 'model_name'. Path: {path}{tm.endc}")
     
