@@ -4,7 +4,7 @@ from source.termcolors import Terminal_Colors as tm
 
 class Input_Handling:
     def __init__(self, yaml_path:str) -> None:
-        self.model = None
+        self.model_name = None
         self.yaml_file = self.read_yaml(path=yaml_path)
         self.train_flag = self.training_check()
         self.n_epochs = self.get_epochs()
@@ -65,17 +65,17 @@ class Input_Handling:
         doc
         """
         # check model option in YAML file
-        if not "save_model" in self.yaml_file.keys():
-            raise Exception(f"{tm.fail}[save_model] option not included...{tm.endc}")
+        if not "model_name" in self.yaml_file.keys():
+            raise Exception(f"{tm.fail}[model_name] option not included...{tm.endc}")
         
         # when model should already exist
-        path = self.yaml_file["save_model"]
-        is_model = os.path.exists(path)
+        path = self.yaml_file["model_name"]
+        is_model = os.path.exists(f"{path}.pt")
         # if model does not exist throw error
         if is_model:
             self.model = path
         else:
-            raise Exception(f"{tm.fail}PyTorch model specified through 'save_model'. Path: {path}{tm.endc}")
+            raise Exception(f"{tm.fail}PyTorch model specified through 'model_name'. Path: {path}{tm.endc}")
     
     def get_output_path(self) -> str:
         """
@@ -119,6 +119,7 @@ class Input_Handling:
         self.result_dir = f"{self.output_directory}/results/"
         self.model_dir = f"{self.output_directory}/models/"
         self.report_dir = f"{self.output_directory}/reports/"
+
         directory_list = [self.plot_dir, self.result_dir, self.model_dir, self.report_dir]
         
         for direc in directory_list:

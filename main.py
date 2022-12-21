@@ -23,7 +23,7 @@ if check.train_flag:
     #cnn_model.predict(x=data.test_data)
 
     # save model
-    cnn_model.save(save_path=check.model_dir)
+    cnn_model.save(save_path=f"{check.model_dir}/{check.model_name}.pt")
 
     # plot stuff
     cnn_model.plot_training_loss()

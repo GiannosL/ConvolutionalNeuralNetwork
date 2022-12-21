@@ -19,7 +19,7 @@ def generate_main(filename:str, output_directory:str, model_obj:Input_Handling) 
     main_html =  read_html(filename)
     
     # replace placeholders in string
-    main_html = main_html.replace(old="_MODEL_NAME_", new=model_obj.model.split(".")[0])
+    main_html = main_html.replace(old="_MODEL_NAME_", new=model_obj.model_name)
     main_html = main_html.replace(old="_N_TRAINING_IMAGES_", new="")
     main_html = main_html.replace(old="_N_EPOCHS_", new="")
 
