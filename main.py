@@ -23,14 +23,14 @@ if check.train_flag:
     #cnn_model.predict(x=data.test_data)
 
     # save model
-    cnn_model.save()
+    cnn_model.save(save_path=check.model_dir)
 
     # plot stuff
     cnn_model.plot_training_loss()
     cnn_model.plot_pred_loss()
 
     # generate training report
-    generate_report(input_obj=check, output_dir="")
+    generate_report(input_obj=check, output_dir=check.report_dir)
     
 else:
     # load pre-trained model

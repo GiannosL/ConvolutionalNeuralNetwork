@@ -10,6 +10,9 @@ class Input_Handling:
         self.n_epochs = self.get_epochs()
         self.output_directory = self.get_output_path()
 
+        # generate output directory
+        self.generate_output()
+
     def read_yaml(self, path:str) -> dict:
         """
         doc
@@ -89,7 +92,7 @@ class Input_Handling:
         if not is_model:
             raise Exception(f"{tm.fail}Output directory 'output_directory' missing. Path: {path}{tm.endc}")
         
-        return path
+        return path[:-1]
 
     def get_epochs(self) -> None:
         """
@@ -105,4 +108,22 @@ class Input_Handling:
             print(f"{tm.warning}Option \"epochs\" is not set from YAML file. Default: 10{tm.endc}")
             
         return n_epochs
+    
+    def generate_output(self) -> None:
+        """
+        generates directory structure 
+        for output files
+        """
+        # directories needed
+        self.plot_dir = f"{self.output_directory}/plots/"
+        self.result_dir = f"{self.output_directory}/results/"
+        self.model_dir = f"{self.output_directory}/models/"
+        self.report_dir = f"{self.output_directory}/reports/"
+        directory_list = [self.plot_dir, self.result_dir, self.model_dir, self.report_dir]
+        
+        for direc in directory_list:
+            try:
+                os.mkdir(direc)
+            except:
+                print(f"{tm.warning}Could not generate directory: {direc}! {tm.endc}")
         
