@@ -88,21 +88,24 @@ class CNN:
         if verbose:
             print(f"{tm.okgreen}Training time: {self.training_time: 0.2f} mins{tm.endc}")
     
-    def plot_training_loss(self) -> None:
+    def plot_training_loss(self, output_path:str) -> None:
         """
         Plot loss over the range of training epochs.
         """
         # make sure the model has been trained
         if not self.trained:
             print(f"{tm.fail}Model has not been trained yet!{tm.endc}")
-            return 1
+            return None
+        elif self.n_epochs == 1:
+            print(f"{tm.warning}No plot needed, only 1 epoch during training!{tm.endc}")
         
         plt.figure(figsize=(10, 7))
         plt.plot(range(self.n_epochs), self.training_losses, color="maroon")
         plt.title("Training loss over epochs", fontsize=16, weight="bold")
         plt.xlabel("Epochs", fontsize=12)
         plt.ylabel("Loss", fontsize=12)
-        plt.show()
+        plt.savefig(f"{output_path}/training_loss.png")
+        plt.clf()
 
     def predict(self, x:torch.Tensor) -> torch.Tensor:
         """
@@ -124,7 +127,7 @@ class CNN:
     
         return predicted
     
-    def plot_pred_loss(self):
+    def plot_pred_loss(self, output_path:str) -> None:
         """
         Plot prediction loss as a horizontal line
         in the sample plot with the training loss over
@@ -133,10 +136,10 @@ class CNN:
         # make sure the model has been trained and made predictions
         if not self.trained:
             print(f"{tm.fail}Model has not been trained yet!{tm.endc}")
-            return 1
+            return None
         elif not self.prediction_flag:
             print(f"{tm.fail}Model has not made a prediction yet!{tm.endc}")
-            return 1
+            return None
         
         plt.figure(figsize=(10, 7))
         plt.axhline(y=self.prediction_loss, color="orange", label="test set")
@@ -145,7 +148,8 @@ class CNN:
         plt.ylabel("Loss", fontsize=12)
         plt.xlabel("Epochs", fontsize=12)
         plt.legend()
-        plt.show()
+        plt.savefig(f"{output_path}/prediction_loss.png")
+        plt.clf()
 
     def save(self, save_path:str="my_model.pt") -> None:
         """

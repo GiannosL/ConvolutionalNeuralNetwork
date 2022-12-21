@@ -29,8 +29,8 @@ if check.train_flag:
     generate_report(check=check, model=cnn_model, output_dir=check.report_dir)
 
     # plot stuff
-    cnn_model.plot_training_loss()
-    cnn_model.plot_pred_loss()
+    cnn_model.plot_training_loss(output_path=check.plot_dir)
+    cnn_model.plot_pred_loss(output_path=check.plot_dir)
     
 else:
     # load pre-trained model

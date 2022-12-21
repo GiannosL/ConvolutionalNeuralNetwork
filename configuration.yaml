@@ -1,5 +1,5 @@
 train: "yes"
-epochs: 1
+epochs: 2
 model_name: "apollo"
 training_data: "~/Desktop/projects/datasets/pet_images/"
 
