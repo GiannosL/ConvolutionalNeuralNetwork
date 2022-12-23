@@ -108,7 +108,7 @@ class Input_Handling:
 
     def get_epochs(self) -> None:
         """
-        doc
+        validate number of epochs in config file
         """
         # default value
         n_epochs = 10

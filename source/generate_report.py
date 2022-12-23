@@ -4,7 +4,7 @@ from source.checks import Input_Handling
 
 def read_html(filename:str) -> str:
     """
-    doc
+    read html file and return it as a string
     """
     with open(filename, "r") as f:
         my_file = f.read()
@@ -15,7 +15,7 @@ def read_html(filename:str) -> str:
 def generate_main(filename:str, output_directory:str, check_obj:Input_Handling,
                   model:CNN) -> None:
     """
-    doc
+    read the home.html file and replace placeholders
     """
     # read file as string
     main_html =  read_html(filename)
