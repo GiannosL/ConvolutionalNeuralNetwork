@@ -14,7 +14,7 @@ class Input_Handling:
 
     def read_yaml(self, path:str) -> dict:
         """
-        doc
+        read yaml configuration file
         """
         with open(path, "r") as stream:
             try:
@@ -25,7 +25,8 @@ class Input_Handling:
 
     def training_check(self) -> bool:
         """
-        doc
+        check that variables necessary for training
+        exist in the yaml file
         """
         # check train option in YAML file
         if not "train" in self.yaml_file.keys():
@@ -45,7 +46,8 @@ class Input_Handling:
     
     def check_for_data(self) -> None:
         """
-        doc
+        make sure the file structure for the 
+        input data is set
         """
         # check train option in YAML file
         if not "training_data" in self.yaml_file.keys():
@@ -72,7 +74,7 @@ class Input_Handling:
             
     def check_for_model(self) -> None:
         """
-        doc
+        look for the model in the specified path
         """
         # check model option in YAML file
         if not "model_name" in self.yaml_file.keys():
@@ -89,7 +91,7 @@ class Input_Handling:
     
     def get_output_path(self) -> str:
         """
-        doc
+        validate the existance of the output path
         """
         # check model option in YAML file
         if not "output_directory" in self.yaml_file.keys():
