@@ -30,6 +30,20 @@ def generate_main(filename:str, output_directory:str, check_obj:Input_Handling,
         f.write(main_html)
 
 
+def generate_prediction(filename:str, output_directory:str) -> None:
+    """
+    read the prediction.html file and replace placeholders
+    """
+    pass
+
+
+def generate_plots(filename:str, output_directory:str) -> None:
+    """
+    read the prediction.html file and replace placeholders
+    """
+    pass
+
+
 def generate_report(check:Input_Handling, model:CNN, output_dir:str) -> None:
     """
     generate HTML-report files based on templates
