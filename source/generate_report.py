@@ -25,6 +25,11 @@ def generate_main(filename:str, output_directory:str, check_obj:Input_Handling,
     main_html = main_html.replace("_N_TRAINING_IMAGES_", "")
     main_html = main_html.replace("_N_EPOCHS_", str(check_obj.n_epochs))
 
+    # switch file paths
+    main_html = main_html.replace("home.html", "main.html")
+    main_html = main_html.replace("predictions.html", "pred.html")
+    main_html = main_html.replace("plots.html", "plot.html")
+
     # save result in output directory
     with open(f"{output_directory}/main.html", "w+") as f:
         f.write(main_html)
@@ -37,6 +42,11 @@ def generate_prediction(filename:str, output_directory:str) -> None:
     # read file as string
     prediction_html = read_html(filename=filename)
 
+    # switch file paths
+    prediction_html = prediction_html.replace("home.html", "main.html")
+    prediction_html = prediction_html.replace("predictions.html", "pred.html")
+    prediction_html = prediction_html.replace("plots.html", "plot.html")
+
     # save result in output directory
     with open(f"{output_directory}/pred.html", "w+") as f:
         f.write(prediction_html)
@@ -48,6 +58,11 @@ def generate_plots(filename:str, output_directory:str) -> None:
     """
     # read file as string
     plots_html = read_html(filename=filename)
+
+    # switch file paths
+    plots_html = plots_html.replace("home.html", "main.html")
+    plots_html = plots_html.replace("predictions.html", "pred.html")
+    plots_html = plots_html.replace("plots.html", "plot.html")
 
     # save result in output directory
     with open(f"{output_directory}/plot.html", "w+") as f:
