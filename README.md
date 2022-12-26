@@ -8,7 +8,6 @@
 </div>
 
 <h2>Description</h2>
-
 <p>
     The goal is to create a package that contains an automated implementation of a Convolutional Neural Network (CNN). 
     The package will be accompanied by a script (<em>main.py</em>) which consists of an implementation of the package.
@@ -30,4 +29,12 @@
     adjusted automatically in a hyper-parameter optimization step. Training should appear as a method in the object class and
     predictions should not contribute to the training of the dataset. The model should be able to produce some plots to 
     describe processes such as training or predicting.
+</p>
+
+<h2>Report</h2>
+<p>
+    At the end of running the pipeline should be able to produce a report in the form of HTML files.
+    The report is split in three units (tabs): Model training information, Prediction infomration and Plots.
+    Each of those units is only created if the step has been used. E.g. in order to get information in the prediction tab 
+    the model should be used to make some predictions.
 </p>
