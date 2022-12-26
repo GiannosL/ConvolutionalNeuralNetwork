@@ -11,6 +11,7 @@
 
 <p>
     The goal is to create a package that contains an automated implementation of a Convolutional Neural Network (CNN). 
+    The package will be accompanied by a script (<em>main.py</em>) which consists of an implementation of the package.
     The model is going to take as input jpeg images, manipulate them and train on them in order to make predictions.
 </p>
 
