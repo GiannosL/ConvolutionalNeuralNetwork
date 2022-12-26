@@ -20,6 +20,9 @@
     Loads and prepares images for training. The data-object should be optimal for use in the CNN. Images should also be 
     optimized for use when they are taken as input or at least there should be an option for it.
 </p>
+<p>
+    Images should be placed in a proper file structure in order for them to be loaded properly through PyTorch.
+</p>
 
 <h2>Neural Network</h2>
 <p>
