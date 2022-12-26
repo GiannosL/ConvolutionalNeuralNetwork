@@ -34,19 +34,35 @@ def generate_prediction(filename:str, output_directory:str) -> None:
     """
     read the prediction.html file and replace placeholders
     """
-    pass
+    # read file as string
+    prediction_html = read_html(filename=filename)
+
+    # save result in output directory
+    with open(f"{output_directory}/pred.html", "w+") as f:
+        f.write(prediction_html)
 
 
 def generate_plots(filename:str, output_directory:str) -> None:
     """
     read the prediction.html file and replace placeholders
     """
-    pass
+    # read file as string
+    plots_html = read_html(filename=filename)
+
+    # save result in output directory
+    with open(f"{output_directory}/plot.html", "w+") as f:
+        f.write(plots_html)
 
 
 def generate_report(check:Input_Handling, model:CNN, output_dir:str) -> None:
     """
     generate HTML-report files based on templates
     """
+    # home page
     generate_main(filename="source/templates/home.html", output_directory=output_dir, 
                   check_obj=check, model=model)
+    # plot page
+    generate_plots(filename="source/templates/plots.html", output_directory=output_dir)
+
+    # prediction page
+    generate_plots(filename="source/templates/predictions.html", output_directory=output_dir)
