@@ -1,6 +1,8 @@
+# training flags/attributes
 train: "yes"
 epochs: 2
 model_name: "apollo"
 training_data: "~/Desktop/projects/datasets/pet_images/"
 
+# output path
 output_directory: "~/Desktop/projects/ConvolutionalNeuralNetwork/results/"
