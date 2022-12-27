@@ -157,5 +157,8 @@ class CNN:
         """
         torch.save(self.model.state_dict(), save_path)
     
-    def load(self, model_path:str):
+    def load(self, model_path:str) -> None:
+        """
+        load previous saved model
+        """
         self.model.load_state_dict(torch.load(model_path))
