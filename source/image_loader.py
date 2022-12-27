@@ -25,6 +25,7 @@ class Image_Loader:
                                           transform=self.train_transforms)
         test_dt = datasets.ImageFolder(f"{path}test",
                                           transform=self.test_transforms)
+                                          
         # actual dataset and labels
         self.train_data = DataLoader(train_dt, batch_size=100, shuffle=False)
         self.train_labels = train_dt.classes
