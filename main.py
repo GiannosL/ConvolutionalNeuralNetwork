@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-from source.cnn import CNN
-from source.checks import Input_Handling
-from source.image_loader import Image_Loader
-from source.generate_report import generate_report
+from cnn.source.cnn import CNN
+from cnn.source.checks import Input_Handling
+from cnn.source.image_loader import Image_Loader
+from cnn.source.generate_report import generate_report
 
 
 # check input
