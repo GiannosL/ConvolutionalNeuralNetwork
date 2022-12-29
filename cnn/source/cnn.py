@@ -3,9 +3,9 @@ import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
 
-from source.model import Convolutional_Model
-from source.image_loader import Image_Loader
-from source.termcolors import Terminal_Colors as tm
+from .model import Convolutional_Model
+from .image_loader import Image_Loader
+from .termcolors import Terminal_Colors as tm
 
 
 class CNN:

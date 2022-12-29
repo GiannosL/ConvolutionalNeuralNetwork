@@ -1,5 +1,5 @@
-from source.cnn import CNN
-from source.checks import Input_Handling
+from .cnn import CNN
+from .checks import Input_Handling
 
 
 def read_html(filename:str) -> str:

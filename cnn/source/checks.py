@@ -1,5 +1,5 @@
 import os, yaml
-from source.termcolors import Terminal_Colors as tm
+from .termcolors import Terminal_Colors as tm
 
 
 class Input_Handling:

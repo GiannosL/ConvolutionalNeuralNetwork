@@ -1,6 +1,7 @@
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
+
 class Image_Loader:
     def __init__(self, path:str) -> None:
         # tranformations

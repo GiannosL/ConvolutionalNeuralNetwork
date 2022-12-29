@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
 class Convolutional_Model(nn.Module):
     def __init__(self, image_dims:int, output_features:int, colored_image:bool=True) -> None:
         super(Convolutional_Model, self).__init__()
