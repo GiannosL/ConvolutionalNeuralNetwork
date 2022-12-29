@@ -6,10 +6,10 @@ from source.generate_report import generate_report
 
 
 # check input
-check = Input_Handling(yaml_path="configuration.yaml")
+check: Input_Handling = Input_Handling(yaml_path="configuration.yaml")
 
 # create CNN model
-cnn_model = CNN(image_dimensions=224, output_classes=2, model_name=check.model_name)
+cnn_model: CNN = CNN(image_dimensions=224, output_classes=2, model_name=check.model_name)
 
 if check.train_flag:
     # load dataset
