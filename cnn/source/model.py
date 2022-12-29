@@ -7,10 +7,10 @@ class Convolutional_Model(nn.Module):
     def __init__(self, image_dims:int, output_features:int, colored_image:bool=True) -> None:
         super(Convolutional_Model, self).__init__()
         #
-        color_channels = 3 if colored_image else 1
+        color_channels: int = 3 if colored_image else 1
         #
-        channels_1 = 6
-        channels_2 = 16
+        channels_1: int = 6
+        channels_2: int = 16
 
         # convolutional layer, input_channels refers to the image colours (1 - gray, 3 - colour)
         self.conv1 = nn.Conv2d(in_channels=color_channels, out_channels=channels_1, kernel_size=3, stride=1)
@@ -19,7 +19,7 @@ class Convolutional_Model(nn.Module):
         # final dimensions
         # convolution with no padding is -2
         # pooling is the division by 2
-        reduced_image_dims = int((((image_dims - 2)/2) - 2)/2)
+        reduced_image_dims: int = int((((image_dims - 2)/2) - 2)/2)
         convolutional_output = channels_2 * reduced_image_dims * reduced_image_dims
 
         # normal fully connected layers
