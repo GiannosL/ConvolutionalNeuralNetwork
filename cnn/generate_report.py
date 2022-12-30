@@ -74,10 +74,10 @@ def generate_report(check:Input_Handling, model:CNN, output_dir:str) -> None:
     generate HTML-report files based on templates
     """
     # home page
-    generate_main(filename="source/templates/home.html", output_directory=output_dir, 
+    generate_main(filename="cnn/templates/home.html", output_directory=output_dir, 
                   check_obj=check, model=model)
     # plot page
-    generate_plots(filename="source/templates/plots.html", output_directory=output_dir)
+    generate_plots(filename="cnn/templates/plots.html", output_directory=output_dir)
 
     # prediction page
-    generate_plots(filename="source/templates/predictions.html", output_directory=output_dir)
+    generate_plots(filename="cnn/templates/predictions.html", output_directory=output_dir)
